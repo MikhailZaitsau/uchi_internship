@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  db:
+    image: 'postgres:latest'
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+
+  rails:
+    build: ./ 
+    ports:
+      - '3000:3000'
+    env_file:
+      - .env
+    volumes:
+      - .:/uchi_internship
+    depends_on:
+      - db
+
+volumes:
+  postgres:
