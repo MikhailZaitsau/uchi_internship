@@ -16,10 +16,10 @@ RSpec.describe 'StudentsController' do
   end
 
   describe 'DELETE /students/{user_id}' do
-    let(:student.id) { create(student) }
+    let(:student_id) { create(student) }
 
     it 'delete an existing student' do
-      delete("/student/#{student.id}")
+      delete("/student/#{student_id}")
       expect(Student.last.id).not_to eq(student.id)
     end
   end
