@@ -1,6 +1,6 @@
 FROM ruby:3.1.2-buster
 
-ARG APP_ROOT=/flight_numbers
+ARG APP_ROOT=/uchi_internship
 
 ENV BUNDLER_VERSION=2.4.7
 
