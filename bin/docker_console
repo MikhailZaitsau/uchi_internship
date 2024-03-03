@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -e
+
+command="docker compose run --rm rails /bin/bash -c 'bin/rails c ${@}'"
+eval $command
