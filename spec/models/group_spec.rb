@@ -36,7 +36,7 @@ RSpec.describe Group do
     context 'when letter is empty' do
       let(:letter) { nil }
 
-      it "doesnt't create a group" do
+      it "doesn't create a group" do
         expect(group).not_to be_persisted
       end
     end
@@ -44,7 +44,7 @@ RSpec.describe Group do
     context 'when letter is an integer' do
       let(:letter) { 5 }
 
-      it "doesnt't create a group" do
+      it "doesn't create a group" do
         expect(group).not_to be_persisted
       end
     end
@@ -52,7 +52,7 @@ RSpec.describe Group do
     context 'when letter is not a letter' do
       let(:letter) { '5' }
 
-      it "doesnt't create a group" do
+      it "doesn't create a group" do
         expect(group).not_to be_persisted
       end
     end
@@ -60,7 +60,7 @@ RSpec.describe Group do
     context 'when students_count is empty' do
       let(:students_count) { nil }
 
-      it "doesnt't create a group" do
+      it "doesn't create a group" do
         expect(group).not_to be_persisted
       end
     end
@@ -68,7 +68,7 @@ RSpec.describe Group do
     context 'when students_count is not a number' do
       let(:students_count) { 'F' }
 
-      it "doesnt't create a group" do
+      it "doesn't create a group" do
         expect(group).not_to be_persisted
       end
     end
@@ -76,7 +76,7 @@ RSpec.describe Group do
     context 'when students_count is not an integer' do
       let(:students_count) { 2.3 }
 
-      it "doesnt't create a group" do
+      it "doesn't create a group" do
         expect(group).not_to be_persisted
       end
     end
