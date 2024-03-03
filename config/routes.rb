@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   post '/students', to: 'students#create'
   delete '/students/:id', to: 'students#destroy'
-  get '/schools/:id/classes/:id/students', to: 'students#index'
+  get '/schools/:school_id/classes/:id/students', to: 'students#index'
   get '/schools/:id/classes/', to: 'groups#index'
 
   # Defines the root path route ("/")
