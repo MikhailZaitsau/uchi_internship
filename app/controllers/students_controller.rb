@@ -39,7 +39,7 @@ class StudentsController < ApplicationController
   end
 
   def fetch_students_params
-    { school_id: params[:school_id], group_id: params[:id] }
+    { school_id: params[:school_id], group_id: params[:class_id] }
   end
 
   def new_student_params

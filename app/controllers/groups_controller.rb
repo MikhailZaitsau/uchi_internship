@@ -1,7 +1,7 @@
 class GroupsController < ApplicationController
 
   def index
-    @school_id = params[:id]
+    @school_id = params[:school_id]
     if fetch_groups.empty?
       render status: :no_content
     else
