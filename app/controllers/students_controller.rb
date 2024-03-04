@@ -13,7 +13,7 @@ class StudentsController < ApplicationController
   def create
     student = create_student
     if student
-      token = generate_auth_token(student.id)
+      token = generate_auth_token(student[:id])
       response.set_header('X-Auth-Token', token)
       render json: student, status: :created
     else
