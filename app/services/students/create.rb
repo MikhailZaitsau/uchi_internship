@@ -2,13 +2,14 @@ module Students
   class Create
     def call(params)
       @params = params
-      student
+      create_student
     end
 
     private
 
-    def student
-      @student ||=  Student.new(@params).save
+    def create_student
+      student = Student.new(@params)
+      student.save ? student : false
     end
   end
 end

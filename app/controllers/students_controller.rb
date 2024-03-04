@@ -1,5 +1,7 @@
 require 'pry-byebug'
 class StudentsController < ApplicationController
+  before_action :authorize_student, only: [:destroy]
+
   def index
     if fetch_students.empty?
       render status: :no_content
@@ -9,8 +11,11 @@ class StudentsController < ApplicationController
   end
 
   def create
-    if create_student
-      render json: create_student, status: :created
+    student = create_student
+    if student
+      token = generate_auth_token(student.id)
+      response.set_header('X-Auth-Token', token)
+      render json: student, status: :created
     else
       render status: :method_not_allowed
     end
@@ -25,6 +30,18 @@ class StudentsController < ApplicationController
   end
 
   private
+
+  def authorize_student
+    render status: :unauthorized unless decode_token[0] == params[:id].to_i
+  end
+
+  def decode_token
+    Students::TokenDecoder.new.call(request.headers['X-Auth-Token'])
+  end
+
+  def generate_auth_token(student_id)
+    Students::TokenGenerator.new.call(student_id)
+  end
 
   def fetch_students
     Students::Fetch.new.call(fetch_students_params)
