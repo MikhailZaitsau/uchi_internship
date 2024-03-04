@@ -18,6 +18,12 @@ RSpec.describe 'StudentsController' do
       expect(response).to have_http_status(:created)
     end
 
+    it 'returns valid X-Auth-Token token' do
+      post('/students', params:)
+      expect(response.headers['X-Auth-Token'])
+        .to eq(JWT.encode(response.parsed_body[:id], Rails.application.credentials.secret_key_base, 'HS256'))
+    end
+
     context 'when params are incorrect' do
       let(:first_name) { nil }
 
@@ -32,16 +38,30 @@ RSpec.describe 'StudentsController' do
     before { create(:student) }
 
     let!(:student) { create(:student) }
+    let(:token) { JWT.encode(student.id, Rails.application.credentials.secret_key_base, 'HS256') }
+    let(:headers) { { 'X-Auth-Token' => token } }
+
 
     it 'delete an existing student' do
-      delete("/students/#{student.id}")
+      delete("/students/#{student.id}", headers:)
       expect(Student.last.id).not_to eq(student.id)
     end
 
     context "when student doesn't exist" do
+      let(:token) { JWT.encode(999, Rails.application.credentials.secret_key_base, 'HS256') }
+
       it 'returns an error' do
-        delete('/students/999')
+        delete('/students/999', headers:)
         expect(response).to have_http_status(:bad_request)
+      end
+    end
+
+    context 'when X-Auth-Token are not valid' do
+      let(:token) { JWT.encode(student.id + 1, Rails.application.credentials.secret_key_base, 'HS256') }
+
+      it 'returns unauthorized' do
+        delete("/students/#{student.id}", headers:)
+        expect(response).to have_http_status(:unauthorized)
       end
     end
   end
