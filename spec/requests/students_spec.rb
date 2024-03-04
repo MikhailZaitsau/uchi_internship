@@ -17,6 +17,15 @@ RSpec.describe 'StudentsController' do
       post('/students', params:)
       expect(response).to have_http_status(:created)
     end
+
+    context 'when params are incorrect' do
+      let(:first_name) { nil }
+
+      it "doesn't creates a new student" do
+        post('/students', params:)
+        expect(response).to have_http_status(:method_not_allowed)
+      end
+    end
   end
 
   describe 'DELETE /students/{user_id}' do
@@ -27,6 +36,13 @@ RSpec.describe 'StudentsController' do
     it 'delete an existing student' do
       delete("/students/#{student.id}")
       expect(Student.last.id).not_to eq(student.id)
+    end
+
+    context "when student doesn't exist" do
+      it 'returns an error' do
+        delete('/students/999')
+        expect(response).to have_http_status(:bad_request)
+      end
     end
   end
 
@@ -40,6 +56,16 @@ RSpec.describe 'StudentsController' do
     it 'get class students list' do
       get("/schools/#{School.last.id}/classes/#{Group.last.id}/students")
       expect(response).to have_http_status(:ok)
+    end
+
+    context 'when students are not found' do
+      let(:school) { create(:school) }
+      let(:group) { create(:group) }
+
+      it 'returns no content' do
+        get("/schools/#{school.id}/classes/#{group.id}/students")
+        expect(response).to have_http_status(:no_content)
+      end
     end
   end
 end
