@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'pry-byebug'
 class StudentsController < ApplicationController
   before_action :authorize_student, only: [:destroy]

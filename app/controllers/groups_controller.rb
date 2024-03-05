@@ -1,5 +1,6 @@
-class GroupsController < ApplicationController
+# frozen_string_literal: true
 
+class GroupsController < ApplicationController
   def index
     @school_id = params[:school_id]
     if fetch_groups.empty?

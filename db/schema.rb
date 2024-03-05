@@ -34,8 +34,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_03_150311) do
     t.string "surname"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "group_id", null: false
-    t.bigint "school_id", null: false
+    t.bigint "group_id"
+    t.bigint "school_id"
     t.index ["group_id"], name: "index_students_on_group_id"
     t.index ["school_id"], name: "index_students_on_school_id"
   end

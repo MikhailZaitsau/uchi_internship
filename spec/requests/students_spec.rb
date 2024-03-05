@@ -41,7 +41,6 @@ RSpec.describe 'StudentsController' do
     let(:token) { JWT.encode(student.id, Rails.application.credentials.secret_key_base, 'HS256') }
     let(:headers) { { 'X-Auth-Token' => token } }
 
-
     it 'delete an existing student' do
       delete("/students/#{student.id}", headers:)
       expect(Student.last.id).not_to eq(student.id)

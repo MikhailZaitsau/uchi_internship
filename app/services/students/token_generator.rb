@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Students
   class TokenGenerator
     def call(student_id)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Group < ApplicationRecord
   has_many :students, dependent: :restrict_with_exception
   validates :number, uniqueness: { scope: :letter }, numericality: { only_integer: true }, presence: true

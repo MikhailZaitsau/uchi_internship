@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Student < ApplicationRecord
   belongs_to :group # , counter_cache: true # conflict with readonly requirements to 'students count'
   belongs_to :school
