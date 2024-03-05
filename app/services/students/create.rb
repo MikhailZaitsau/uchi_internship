@@ -1,6 +1,7 @@
 module Students
   class Create
     def call(params)
+      params['group_id'] = params.delete('class_id')
       @params = params
       create_student
     end

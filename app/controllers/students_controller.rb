@@ -60,6 +60,6 @@ class StudentsController < ApplicationController
   end
 
   def new_student_params
-    params.permit(%i[first_name last_name surname group_id school_id])
+    params.permit(%i[first_name last_name surname class_id school_id])
   end
 end

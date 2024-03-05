@@ -4,13 +4,13 @@ require 'rails_helper'
 
 RSpec.describe 'StudentsController' do
   describe 'POST /students' do
-    let(:params) { { first_name:, last_name:, surname:, group_id:, school_id: } }
+    let(:params) { { first_name:, last_name:, surname:, class_id:, school_id: } }
     let(:group) { create(:group) }
     let(:school) { create(:school) }
     let(:first_name) { 'Вячеслав' }
     let(:last_name) { 'Абдурахмангаджиевич' }
     let(:surname) { 'Мухобойников-Сыркин' }
-    let(:group_id) { group.id }
+    let(:class_id) { group.id }
     let(:school_id) { school.id }
 
     it 'creates a new student' do
