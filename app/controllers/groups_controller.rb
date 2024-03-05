@@ -1,11 +1,18 @@
-class GroupsController < ApplicationController
+# frozen_string_literal: true
 
+class GroupsController < ApplicationController
   def index
-    groups_list = Group.includes(:students).where(students: { school_id: params[:id] })
-    if groups_list.empty?
+    @school_id = params[:school_id]
+    if fetch_groups.empty?
       render status: :no_content
     else
-      render json: groups_list, status: :ok
+      render json: fetch_groups, status: :ok
     end
+  end
+
+  private
+
+  def fetch_groups
+    Groups::Fetch.new.call(@school_id)
   end
 end

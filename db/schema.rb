@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_29_185512) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_03_150311) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_29_185512) do
     t.integer "students_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["number", "letter"], name: "index_groups_on_number_and_letter", unique: true
   end
 
   create_table "schools", force: :cascade do |t|
@@ -33,8 +34,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_29_185512) do
     t.string "surname"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "group_id", null: false
-    t.bigint "school_id", null: false
+    t.bigint "group_id"
+    t.bigint "school_id"
     t.index ["group_id"], name: "index_students_on_group_id"
     t.index ["school_id"], name: "index_students_on_school_id"
   end
